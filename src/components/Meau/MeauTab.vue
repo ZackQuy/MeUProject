@@ -11,7 +11,7 @@
             <div >
               <el-menu
   :default-active="activeIndex2"
-  class="el-menu-demo"
+  
   mode="horizontal"
   @select="handleSelect"
   background-color="#545c64"
@@ -69,6 +69,7 @@ export default {
 <style >
 .meau_main{
   background-color: #545c64;
+ 
 }
 .el-menu {
     width: -moz-fit-content; 

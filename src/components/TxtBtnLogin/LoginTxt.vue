@@ -29,7 +29,9 @@ export default {
       this.comments = "cLoginDialog";
     },
     UserBlock:function(){
-      this.comments = "cLoginUserBlock";
+      this.comments = "";
+      this.$emit('LoginUser');
+      
     },
     close:function(){
      this.comments = "";

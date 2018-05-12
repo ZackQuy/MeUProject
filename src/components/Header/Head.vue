@@ -21,7 +21,9 @@
       </el-col>
   <el-col :xs="10" :sm="10" :md="8" :lg="6" :xl="4">
           <div class="grid-content ">
-              <c-login></c-login>
+            <keep-alive>
+            <component v-bind:is="comments"  v-on:LoginUser="UserBlock" v-on:Login="LoginBlock"></component>
+            </keep-alive>
           </div>
   </el-col>
   </el-row>
@@ -34,7 +36,15 @@ export default {
   name: 'Head',
   data () {
     return {
-      msg: '头部布局'
+     comments:'cLogin'
+    }
+  },
+  methods:{
+    UserBlock:function(){
+      this.comments = "cLoginUserBlock";
+    },
+    LoginBlock:function(){
+      this.comments = "cLogin";
     }
   }
 }

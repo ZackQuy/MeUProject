@@ -77,8 +77,8 @@ export default {
       this.$refs[formName].validate((valid) => {
           if (valid) {
            // alert('submit!');
-            self.handleClose();
-            self.handleLogin("LoginUser","cLoginUserBlock");
+            
+            self.handleLogin("LoginUser","");
 
           } else {
             console.log('error submit!!');
