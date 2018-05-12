@@ -11,7 +11,7 @@
                      @click='Login'
                      >
                      登录</a></div> 
-                     <component v-bind:is="loginDialog" v-on:closeDialog="close"></component>
+                     <component v-bind:is="comments" v-on:closeDialog="close" v-on:LoginUser="UserBlock"></component>
                      
  </div>
 </template>
@@ -21,16 +21,18 @@
 export default {
   data () {
     return {
-       loginDialog:''
+       comments:''
     }
   },
   methods:{
     Login:function(){
-      this.loginDialog = "cLoginDialog";
-
+      this.comments = "cLoginDialog";
+    },
+    UserBlock:function(){
+      this.comments = "cLoginUserBlock";
     },
     close:function(){
-     this.loginDialog = "";
+     this.comments = "";
     }
   }
 }

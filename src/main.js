@@ -11,6 +11,7 @@ import cloginvue from './components/TxtBtnLogin/LoginTxt';
 import cHeadervue from './components/Header/Head';
 import cFootvue from './components/Footer/Foot';
 import clogindialog from './components/loginDialog/loginDialog';
+import cloginuserblock from './components/LoginUserBlock/LoginUserBlock';
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.use(VueAwesomeSwiper);
@@ -20,6 +21,7 @@ Vue.component('cHeader',cHeadervue);//注册全局头部组件
 Vue.component('cFoot',cFootvue);//注册全局footer组件
 Vue.component('cLogin',cloginvue);//注册全局login组件
 Vue.component('cLoginDialog',clogindialog);//注册全局login弹窗组件
+Vue.component('cLoginUserBlock',cloginuserblock);//注册全局用户登录组件
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
