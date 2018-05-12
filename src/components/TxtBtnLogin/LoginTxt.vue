@@ -2,7 +2,9 @@
 <div class ="t_login">
                     <div style="float:left" ><a  style="color:#FFF;font-weight:300; font-size:19px;cursor:pointer;" 
                     onmouseover ="this.style.cssText ='color:#168391;font-weight:300; font-size:19px;cursor:pointer;'" 
-                    onmouseout="this.style.cssText='color:#FFF;font-weight:300; font-size:19px;cursor:pointer;'">
+                    onmouseout="this.style.cssText='color:#FFF;font-weight:300; font-size:19px;cursor:pointer;'"
+                    @click="Register"
+                    >
                     注册</a></div>
                     <div style="float:left"><img style="height:22px;" src ="./img/split.png" /></div>
                     <div style="float:left" ><a  style="color:#FFF;font-weight:300; font-size:19px;cursor:pointer;" 
@@ -35,6 +37,9 @@ export default {
     },
     close:function(){
      this.comments = "";
+    },
+    Register:function(){
+      this.$router.push('Resister');
     }
   }
 }

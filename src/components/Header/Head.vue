@@ -4,7 +4,7 @@
       <el-col :xs="14" :sm="14" :md="16" :lg="18" :xl="20">
           <div class="grid-content ">
               <div class ="t_logo">
-                    <a href="">
+                    <a @click="ToMain">
                         <img src="./assets/logo.png" />
                     </a>
                 </div>
@@ -45,6 +45,9 @@ export default {
     },
     LoginBlock:function(){
       this.comments = "cLogin";
+    },
+    ToMain:function(){
+      this.$router.push('main');
     }
   }
 }

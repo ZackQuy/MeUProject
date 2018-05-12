@@ -13,9 +13,9 @@ import cFootvue from './components/Footer/Foot';
 import clogindialog from './components/loginDialog/loginDialog';
 import cloginuserblock from './components/LoginUserBlock/LoginUserBlock';
 Vue.config.productionTip = false;
-Vue.use(ElementUI);
-Vue.use(VueAwesomeSwiper);
-Vue.use(router);
+Vue.use(ElementUI);//使用ui框架
+Vue.use(VueAwesomeSwiper);//使用图片滚动插件
+
 //注册全局组件，头部组件、foot组件、login组件、用户信息组件、登录窗口组件
 Vue.component('cHeader',cHeadervue);//注册全局头部组件
 Vue.component('cFoot',cFootvue);//注册全局footer组件
@@ -26,9 +26,19 @@ Vue.component('cLoginUserBlock',cloginuserblock);//注册全局用户登录组�
 new Vue({
   el: '#app',
   router,
+  mounted(){
+    
+  },
+  methods:{
+    checkLogin(){
+      
+    }
+   
+  },
   components: { App },
   template: '<App/>'
 })
+
 
 
 
