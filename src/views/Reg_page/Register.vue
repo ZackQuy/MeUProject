@@ -26,7 +26,7 @@
               <el-input v-model="ruleForm.email"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="pwd">
-              <el-input v-model="ruleForm.pwd"></el-input>
+              <el-input type="password" v-model="ruleForm.pwd"></el-input>
             </el-form-item>
              <el-form-item style="text-align: center;">
               <el-button type="primary" @click="submitForm('ruleForm')">创建账户</el-button>
@@ -49,7 +49,7 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   name: 'Reg',
   data () {
@@ -133,15 +133,29 @@ export default {
   },
   methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
-            this.$router.push('/');
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
+        var self = this;
+       // this.$refs[formName].validate((valid) => {
+        //  if (valid) {
+            var data ={};
+             data.strList= JSON.stringify(this.ruleForm);
+
+            axios({
+  method: 'post',
+  url: 'http://localhost:55052/MeUService.asmx/regUserMethod',
+  data: data
+}).then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });;
+            //alert('submit!');
+            //this.$router.push('/');
+        //  } else {
+        //    console.log('error submit!!');
+         //   return false;
+         // }
+        //});
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
