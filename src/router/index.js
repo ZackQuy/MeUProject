@@ -8,7 +8,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/main',
+      path: '/',
       name: 'Main',
       component: Main
     },

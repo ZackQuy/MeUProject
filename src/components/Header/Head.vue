@@ -47,7 +47,7 @@ export default {
       this.comments = "cLogin";
     },
     ToMain:function(){
-      this.$router.push('main');
+      this.$router.push('/');
     }
   }
 }
