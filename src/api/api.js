@@ -36,7 +36,9 @@ service.interceptors.response.use(
 export const postUserData = params => {
   return service.post('/regUserMethod', params).then(res => res.data);
 };
-
+export const loginUser = params => {
+  return service.post('/loginMethod', params).then(res => res.data);
+};
 
 
 let api = {

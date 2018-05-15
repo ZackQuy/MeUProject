@@ -28,6 +28,7 @@ export default {
   },
   methods:{
     Login:function(){
+     
       this.comments = "cLoginDialog";
     },
     UserBlock:function(){

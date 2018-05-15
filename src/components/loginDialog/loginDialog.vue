@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import store from '../../vuex/store';
+import api from '../../api/index';
 export default {
   data () {
     var check = (rule, value, callback) => {//验证输入
@@ -76,10 +78,31 @@ export default {
       var self = this;
       this.$refs[formName].validate((valid) => {
           if (valid) {
-           // alert('submit!');
-            
-            self.handleLogin("LoginUser","");
-
+            var data ={};
+            data.strList= JSON.stringify(this.ruleForm);
+            api.loginUser(data).then((res) => {
+            var result = JSON.parse(res.d);
+           if(result.success)
+           {
+             var u_data = JSON.parse(result.data);
+             self.$message(result.message);
+             sessionStorage.setItem("username", u_data[0].username);  //添加到sessionStorage  
+             sessionStorage.setItem("isLogin",true);  
+             store.state.username=u_data[0].username;             //同步的改变store中的状态  
+             store.state.isLogin=true;
+             self.handleLogin("LoginUser","");
+             console.log(u_data[0].username);
+          }
+      else{
+             self.$message(result.message);
+             self.btnload = false;
+      }
+      
+    })
+    .catch(function (error) {
+     // self.$message(error.message);
+      console.log(error);
+  });
           } else {
             console.log('error submit!!');
             return false;

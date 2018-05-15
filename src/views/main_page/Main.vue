@@ -55,6 +55,7 @@ import cSlilder from '../../components/PicSlild/Slilder';
 import cTripPlan from '../../components/TripPlan/TripPlan';
 import cHotTrip from '../../components/HotTrip/HotTrip';
 import cImgContent from '../../components/ImgContent/ImgContent';
+import store from '../../vuex/store';
 //import cFoot from '../../components/Footer/Foot';
 export default {
   name: 'MAin',

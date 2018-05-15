@@ -22,11 +22,12 @@
 </template>
 
 <script>
+import store from '../../vuex/store';
 export default {
   name: '',
   data () {
     return {
-          name:'zhangqy',
+          name:store.state.username,
           icourl:require('../../../static/Login/ico1.png')
     }
   },
@@ -39,6 +40,12 @@ methods:{
         this.$message('点击了 ' + command);
         if(command === "退出")
         {
+         sessionStorage.removeItem("username");  //移除sessionStorage  
+         sessionStorage.removeItem("isLogin");  
+         sessionStorage.removeItem("userico"); 
+         store.state.userico=''  ;              //同步的改变story中的状态  
+         store.state.username=''  ; 
+         store.state.isLogin=false ;
           self.handleLogin("Login");
         }
       }

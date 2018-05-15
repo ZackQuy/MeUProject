@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import App from './App';
 import router from './router';
-
+import store from './vuex/store';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueAwesomeSwiper from 'vue-awesome-swiper';
@@ -27,15 +27,7 @@ Vue.component('cLoginUserBlock',cloginuserblock);//注册全局用户登录组�
 new Vue({
   el: '#app',
   router,
-  mounted(){
-    
-  },
-  methods:{
-    checkLogin(){
-      
-    }
-   
-  },
+  store,
   components: { App },
   template: '<App/>'
 })

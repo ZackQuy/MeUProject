@@ -32,15 +32,26 @@
 
 <script>
 //import cLogin from '../TxtBtnLogin/LoginTxt';
+import store from '../../vuex/store';
 export default {
   name: 'Head',
   data () {
     return {
-     comments:'cLogin'
+     comments:''
     }
+  },
+  created: function () {
+    let bo = store.getters.isLogin;//更新登录状态
+    if(store.state.isLogin) {//判断是否登录
+        this.comments = "cLoginUserBlock";
+      }
+      else{
+        this.comments = "cLogin";
+      }
   },
   methods:{
     UserBlock:function(){
+      store.state.isLogin = true;
       this.comments = "cLoginUserBlock";
     },
     LoginBlock:function(){

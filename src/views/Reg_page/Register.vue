@@ -29,8 +29,8 @@
               <el-input type="password" v-model="ruleForm.pwd"></el-input>
             </el-form-item>
              <el-form-item style="text-align: center;">
-              <el-button type="primary" @click="submitForm('ruleForm')">创建账户</el-button>
-              <el-button @click="resetForm('ruleForm')">重置</el-button>
+              <el-button type="primary" :loading="btnload" @click="submitForm('ruleForm')">创建账户</el-button>
+              <el-button :disabled="btnload" @click="resetForm('ruleForm')">重置</el-button>
   </el-form-item>
           </el-form>
         </div>
@@ -50,6 +50,9 @@
 
 <script>
 import axios from 'axios';
+import api from '../../api/index';
+import store from '../../vuex/store';
+//store.state.isLogin = false;
 export default {
   name: 'Reg',
   data () {
@@ -112,6 +115,8 @@ export default {
       };
     return {
       labelPosition: 'left',
+      btnload:false,
+      
        ruleForm: {
           uername: '',
           email: '',
@@ -134,28 +139,40 @@ export default {
   methods: {
       submitForm(formName) {
         var self = this;
-       // this.$refs[formName].validate((valid) => {
-        //  if (valid) {
+        this.btnload = true;
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
             var data ={};
-             data.strList= JSON.stringify(this.ruleForm);
-
-            axios({
-  method: 'post',
-  url: 'http://localhost:55052/MeUService.asmx/regUserMethod',
-  data: data
-}).then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });;
+            data.strList= JSON.stringify(this.ruleForm);
+            api.postUserData(data).then((res) => {
+            var result = JSON.parse(res.d);
+           if(result.success)
+           {
+             self.$message(result.message);
+             sessionStorage.setItem("username", '');  //添加到sessionStorage  
+             sessionStorage.setItem("isLogin",true);  
+             store.state.username='';             //同步的改变store中的状态  
+             store.state.isLogin=true;
+             self.$router.push('/');
+          }
+      else{
+             self.$message(result.message);
+             self.btnload = false;
+      }
+      
+    })
+    .catch(function (error) {
+     // self.$message(error.message);
+      console.log(error);
+  });
             //alert('submit!');
             //this.$router.push('/');
-        //  } else {
-        //    console.log('error submit!!');
-         //   return false;
-         // }
-        //});
+          } else {
+            console.log('error submit!!');
+            self.btnload = false;
+            return false;
+          }
+        });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
