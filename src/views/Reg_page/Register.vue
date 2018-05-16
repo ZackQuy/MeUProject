@@ -1,5 +1,6 @@
 <template>
-<div style="width:100%;">
+<div style="width:100%;display: flex;
+  flex-direction: column;background-color: #f5f5f5;">
 <div class="c-left-width"></div>
     <div class="meu_main">
       <el-row>
@@ -10,7 +11,7 @@
       </div>
       </el-row>
       <el-row>
-        <div>
+        <div style="flex: 1;">
         <div class="r_title">
           <span>
               创建您的MeU账户
@@ -37,6 +38,11 @@
         </div>
       </el-row>
       <el-row>
+        <c-img-content>
+
+       </c-img-content>
+      </el-row>
+      <el-row>
       <div class='footer'>
             <c-foot>
               
@@ -52,6 +58,7 @@
 import axios from 'axios';
 import api from '../../api/index';
 import store from '../../vuex/store';
+import cImgContent from '../../components/ImgContent/ImgContent';
 //store.state.isLogin = false;
 export default {
   name: 'Reg',
@@ -135,6 +142,9 @@ export default {
         }
 
     }
+  },
+  components:{
+    cImgContent
   },
   methods: {
       submitForm(formName) {

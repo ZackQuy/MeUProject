@@ -17,7 +17,7 @@
              <el-input type="password" v-model="ruleForm.pwd" style="width:200px" auto-complete="off"></el-input>
              </el-form-item>
              <el-form-item style="text-align: center;margin-top: 30px"> 
-                 <el-button style="width:290px;" type="primary" @click="submitForm('ruleForm')">登录</el-button> 
+                 <el-button style="width:290px;" :loading="btnload" type="primary" @click="submitForm('ruleForm')">登录</el-button> 
             </el-form-item>
           </el-form>
          </div>
@@ -32,34 +32,58 @@ import store from '../../vuex/store';
 import api from '../../api/index';
 export default {
   data () {
-    var check = (rule, value, callback) => {//验证输入
+    var checkUser = (rule, value, callback) => {
+      //校验规则 正则表达式  只允许输入 数字跟字母   
+        var reg=/^[^0-9]+[0-9a-zA-Z_-]/;/*用户*/  
         if (!value) {
           return callback(new Error('用户名不能为空'));
         }
-        else{
-          callback();//返回函数
-        }
+        setTimeout(() => {
+          //通过正则方法 可以拿到一个boolean类型的值 判断 
+          var con_user = reg.test(value);
+          if(con_user)
+          {
+            //todo 数据库校验是否重名
+            callback();
+          }
+          else{
+            callback(new Error('用户名: 必须是字母数字或下划线, 不能以数字开头'));
+          }
+        }, 1000);
       };
-      var valiPass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          callback();
+      var checkPwd = (rule, value, callback) => {
+      //校验规则 正则表达式  只允许输入 数字跟字母   
+        var pwdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;//8到16位数字与字母组合
+        if (!value) {
+          return callback(new Error('密码不能为空'));
         }
+        setTimeout(() => {
+          //通过正则方法 可以拿到一个boolean类型的值 判断 
+          var con_pwd = pwdReg.test(value);
+          if(con_pwd)
+          {
+            //todo 
+            callback();
+          }
+          else{
+            callback(new Error('密码: 8到16位数字与字母组合密码'));
+          }
+        }, 1000);
       };
     return {  
         dialogTableVisible: true,
-        dialogFormVisible: true,      
+        dialogFormVisible: true, 
+        btnload:false,     
         ruleForm: {
           pwd: '',
           name: ''
         },
         rules2: {//建立验证规则
           pwd: [
-            { validator: valiPass, trigger: 'blur' }
+            { validator: checkPwd, trigger: 'blur' }
           ],
           name: [
-            { validator: check, trigger: 'blur' }
+            { validator: checkUser, trigger: 'blur' }
           ]
         },
         formLabelWidth: '90px'
@@ -76,6 +100,7 @@ export default {
     },
     submitForm(formName){//提交表单数据
       var self = this;
+      this.btnload = true;
       this.$refs[formName].validate((valid) => {
           if (valid) {
             var data ={};
@@ -103,10 +128,12 @@ export default {
     })
     .catch(function (error) {
      // self.$message(error.message);
+     self.btnload = false;
       console.log(error);
   });
           } else {
             console.log('error submit!!');
+            self.btnload = false;
             return false;
           }
         });

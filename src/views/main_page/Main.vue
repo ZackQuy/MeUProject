@@ -1,5 +1,5 @@
 <template>
-<div style="width:100%;">
+<div style="width:100%;height:100%;background-color: #f5f5f5;">
 <div class="c-left-width"></div>
     <div class="meu_main">
       <el-row>
