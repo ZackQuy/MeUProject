@@ -23,6 +23,7 @@ let getters = {
       state.isLogin=sessionStorage.getItem('isLogin');   //从sessionStorage中读取状态  
       state.username=sessionStorage.getItem('username');  
       state.userico=sessionStorage.getItem('userico'); 
+      state.userId=sessionStorage.getItem('userId'); 
   }  
   return state.isLogin
   }

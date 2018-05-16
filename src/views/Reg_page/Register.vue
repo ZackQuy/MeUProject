@@ -149,10 +149,13 @@ export default {
            if(result.success)
            {
              self.$message(result.message);
-             sessionStorage.setItem("username", '');  //添加到sessionStorage  
+             var u_data = JSON.parse(result.data);
+             sessionStorage.setItem("username", u_data.uername);  //添加到sessionStorage  
              sessionStorage.setItem("isLogin",true);  
-             store.state.username='';             //同步的改变store中的状态  
-             store.state.isLogin=true;
+             sessionStorage.setItem("userId",u_data.accountId); 
+             store.state.username=u_data.uername;             //同步的改变store中的状态  
+             store.state.userId=u_data.accountId;  
+            store.state.isLogin=true;
              self.$router.push('/');
           }
       else{

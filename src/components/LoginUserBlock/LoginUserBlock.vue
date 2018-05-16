@@ -31,6 +31,7 @@ export default {
           icourl:require('../../../static/Login/ico1.png')
     }
   },
+  
 methods:{
   handleLogin(msg){//登录成功，传值到父组件，切换到用户组件
          this.$emit(msg);

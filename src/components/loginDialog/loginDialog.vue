@@ -88,7 +88,9 @@ export default {
              self.$message(result.message);
              sessionStorage.setItem("username", u_data[0].username);  //添加到sessionStorage  
              sessionStorage.setItem("isLogin",true);  
+             sessionStorage.setItem("userId",u_data[0].accountId); 
              store.state.username=u_data[0].username;             //同步的改变store中的状态  
+             store.state.userId=u_data[0].accountId;  
              store.state.isLogin=true;
              self.handleLogin("LoginUser","");
              console.log(u_data[0].username);
