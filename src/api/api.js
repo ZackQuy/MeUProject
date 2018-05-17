@@ -3,7 +3,8 @@ import {Message} from 'element-ui';
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://localhost:55052/MeUService.asmx', // api的base_url
+  baseURL: 'http://localhost:55052/MeUService.asmx', // api的base_url  http://175.155.179.248:8011/webapi/MeUService.asmx
+  //http://localhost:55052/MeUService.asmx
   timeout: 5000 // request timeout
 });
 
@@ -39,10 +40,14 @@ export const postUserData = params => {
 export const loginUser = params => {
   return service.post('/loginMethod', params).then(res => res.data);
 };
-
+export const get = params => {
+  return service.post('/get', params).then(res => res.data);
+};
 
 let api = {
-  postUserData
+  postUserData,
+  loginUser,
+  get
 };
 
 export default api;

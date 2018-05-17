@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-//import * as actions from './actions';
+import * as actions from './actions';
 //import * as getters from './getters';
 
 Vue.use(Vuex);
@@ -9,7 +9,8 @@ let state = {
   isLogin: false, // 判断是否已经登录,
   username:'',
   userico:'',
-  userId:''
+  userId:'',
+  code:''
 };
 
 let mutations = {
@@ -24,6 +25,7 @@ let getters = {
       state.username=sessionStorage.getItem('username');  
       state.userico=sessionStorage.getItem('userico'); 
       state.userId=sessionStorage.getItem('userId'); 
+      state.code=sessionStorage.getItem('code'); 
   }  
   return state.isLogin
   }
@@ -31,5 +33,6 @@ let getters = {
 export default new Vuex.Store({
   state,
   getters,
-  mutations
+  mutations,
+  actions
 });

@@ -30,6 +30,7 @@
 <script>
 import store from '../../vuex/store';
 import api from '../../api/index';
+
 export default {
   data () {
     var checkUser = (rule, value, callback) => {
@@ -105,12 +106,14 @@ export default {
           if (valid) {
             var data ={};
             data.strList= JSON.stringify(this.ruleForm);
+            data.strList2= store.state.code;
             api.loginUser(data).then((res) => {
             var result = JSON.parse(res.d);
            if(result.success)
            {
              var u_data = JSON.parse(result.data);
              self.$message(result.message);
+            // store.saveLocal(store,u_data[0]);
              sessionStorage.setItem("username", u_data[0].username);  //添加到sessionStorage  
              sessionStorage.setItem("isLogin",true);  
              sessionStorage.setItem("userId",u_data[0].accountId); 
