@@ -154,7 +154,7 @@ export default {
           if (valid) {
             var data ={};
             data.strList= JSON.stringify(this.ruleForm);
-            data.strList2= store.state.code;
+            data.strList2= sessionStorage.getItem('code');
             api.postUserData(data).then((res) => {
             var result = JSON.parse(res.d);
            if(result.success)
