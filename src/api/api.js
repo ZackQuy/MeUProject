@@ -1,10 +1,16 @@
 import axios from 'axios';
 import {Message} from 'element-ui';
-
+import Qs from 'qs';
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://localhost:55052/MeUService.asmx', // api的base_url  http://175.155.179.248:8011/webapi/MeUService.asmx
+  baseURL: 'http://localhost:7615', 
+  // api的base_url  http://175.155.179.248:8011/webapi/MeUService.asmx
   //http://localhost:55052/MeUService.asmx
+  headers:{'Content-Type':'application/x-www-form-urlencoded'},
+  transformRequest: [function (data) {
+    data = Qs.stringify(data);
+    return data;
+}],
   timeout: 5000 // request timeout
 });
 
@@ -38,10 +44,11 @@ export const postUserData = params => {
   return service.post('/regUserMethod', params).then(res => res.data);
 };
 export const loginUser = params => {
-  return service.post('/loginMethod', params).then(res => res.data);
+  //return service.post('/loginMethod', params).then(res => res.data); UserLogin
+  return service.post('/Login/UserLogin', params).then(res => res.data);
 };
 export const get = params => {
-  return service.post('/get', params).then(res => res.data);
+  //return service.post('/get', params).then(res => res.data);
 };
 
 let api = {

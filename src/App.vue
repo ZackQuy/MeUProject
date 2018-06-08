@@ -16,21 +16,21 @@ export default {
   },
   created:function(){
     var data = {};
-    data.strList = index.random();
-    api.get(data).then((res) => {
-        var result = JSON.parse(res.d);
-        if(result.success){
+    //data.strList = index.random();
+    //api.get(data).then((res) => {
+       // var result = JSON.parse(res.d);
+       // if(result.success){
          //this.$message(result.message);
-         sessionStorage.setItem("code",result.data); 
-         store.state.code=result.code;
+       //  sessionStorage.setItem("code",result.data); 
+       //  store.state.code=result.code;
          
-        }
-    })
-    .catch(function (error) {
-      this.$message(error.message);
+      //  }
+   // })
+    //.catch(function (error) {
+     // this.$message(error.message);
      
-      console.log(error);
-  });
+     // console.log(error);
+  //});
   }
 }
 </script>

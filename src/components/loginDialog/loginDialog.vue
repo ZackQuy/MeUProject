@@ -30,7 +30,7 @@
 <script>
 import store from '../../vuex/store';
 import api from '../../api/index';
-
+import axios from 'axios';
 export default {
   data () {
     var checkUser = (rule, value, callback) => {
@@ -58,18 +58,19 @@ export default {
         if (!value) {
           return callback(new Error('密码不能为空'));
         }
-        setTimeout(() => {
+        callback();
+       // setTimeout(() => {
           //通过正则方法 可以拿到一个boolean类型的值 判断 
-          var con_pwd = pwdReg.test(value);
-          if(con_pwd)
-          {
+        //  var con_pwd = pwdReg.test(value);
+        //  if(con_pwd)
+        //  {
             //todo 
-            callback();
-          }
-          else{
-            callback(new Error('密码: 8到16位数字与字母组合密码'));
-          }
-        }, 1000);
+        //    callback();
+        //  }
+       //   else{
+       //     callback(new Error('密码: 8到16位数字与字母组合密码'));
+       //   }
+       // }, 1000);
       };
     return {  
         dialogTableVisible: true,
@@ -104,21 +105,22 @@ export default {
       this.btnload = true;
       this.$refs[formName].validate((valid) => {
           if (valid) {
-            var data ={};
-            data.strList= JSON.stringify(this.ruleForm);
-            data.strList2= sessionStorage.getItem('code');
+            var data= {'model':{'UserName':this.ruleForm.name,'Password':this.ruleForm.pwd},'code':'1'};
+            //data.strList2= sessionStorage.getItem('code');
+
             api.loginUser(data).then((res) => {
-            var result = JSON.parse(res.d);
+            var result = res;
            if(result.success)
            {
-             var u_data = JSON.parse(result.data);
+             //var u_data = JSON.parse(result.data);
+             var u_data = result.data;
              self.$message(result.message);
             // store.saveLocal(store,u_data[0]);
-             sessionStorage.setItem("username", u_data[0].username);  //添加到sessionStorage  
+             sessionStorage.setItem("username", u_data.username);  //添加到sessionStorage  
              sessionStorage.setItem("isLogin",true);  
-             sessionStorage.setItem("userId",u_data[0].accountId); 
-             store.state.username=u_data[0].username;             //同步的改变store中的状态  
-             store.state.userId=u_data[0].accountId;  
+             sessionStorage.setItem("userId",u_data.accountId); 
+             store.state.username=u_data.username;             //同步的改变store中的状态  
+             store.state.userId=u_data.accountId;  
              store.state.isLogin=true;
              self.handleLogin("LoginUser","");
              console.log(u_data[0].username);
